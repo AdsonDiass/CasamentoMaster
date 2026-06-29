@@ -1,0 +1,1007 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Angela & Roberto — 30.06.2027</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Lato:wght@300;400;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --ivory:    #FAF7F4;
+      --ivory-2:  #F0EBE3;
+      --gold:     #C9A96E;
+      --gold-dk:  #8B7355;
+      --gold-lt:  #E8D5B7;
+      --text:     #3A3530;
+      --text-lt:  #7A6F65;
+      --white:    #FFFFFF;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Lato', sans-serif;
+      background: var(--ivory);
+      color: var(--text);
+      font-size: 16px;
+      line-height: 1.7;
+    }
+
+    /* ── NAV ─────────────────────────────────────────── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: rgba(250,247,244,0.96);
+      backdrop-filter: blur(6px);
+      border-bottom: 1px solid var(--gold-lt);
+      padding: 0 2rem;
+      height: 60px;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .nav-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.15rem;
+      font-style: italic;
+      color: var(--gold-dk);
+      letter-spacing: 0.05em;
+    }
+    .nav-links {
+      display: flex; gap: 1.8rem; list-style: none;
+    }
+    .nav-links a {
+      text-decoration: none;
+      font-size: 0.72rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--text-lt);
+      transition: color .2s;
+    }
+    .nav-links a:hover { color: var(--gold-dk); }
+
+    .hamburger {
+      display: none; flex-direction: column; gap: 5px; cursor: pointer;
+      background: none; border: none; padding: 4px;
+    }
+    .hamburger span {
+      display: block; width: 22px; height: 1.5px; background: var(--text);
+      transition: all .3s;
+    }
+
+    /* mobile menu */
+    @media(max-width: 720px) {
+      .nav-links {
+        display: none; flex-direction: column; position: fixed;
+        top: 60px; left: 0; right: 0;
+        background: var(--ivory); border-bottom: 1px solid var(--gold-lt);
+        padding: 1.5rem 2rem; gap: 1.2rem;
+      }
+      .nav-links.open { display: flex; }
+      .hamburger { display: flex; }
+    }
+
+    /* ── ORNAMENT SVG ─────────────────────────────────── */
+    .ornament {
+      display: flex; justify-content: center; margin: 0.4rem 0;
+      opacity: 0.55;
+    }
+
+    /* ── HERO ─────────────────────────────────────────── */
+    #home {
+      min-height: 100vh;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      text-align: center;
+      background: var(--ivory);
+      padding: 80px 2rem 60px;
+      position: relative;
+      overflow: hidden;
+    }
+    #home::before {
+      content: '';
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(ellipse 60% 40% at 50% 0%, rgba(201,169,110,0.12) 0%, transparent 70%),
+        radial-gradient(ellipse 40% 30% at 100% 100%, rgba(201,169,110,0.08) 0%, transparent 60%);
+      pointer-events: none;
+    }
+    .hero-date {
+      font-size: 0.7rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 1.2rem;
+    }
+    .hero-names {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(3.2rem, 8vw, 6rem);
+      font-weight: 300;
+      line-height: 1.1;
+      color: var(--text);
+      letter-spacing: -0.01em;
+    }
+    .hero-names em {
+      font-style: italic;
+      color: var(--gold-dk);
+    }
+    .hero-sub {
+      margin-top: 1.4rem;
+      font-size: 0.85rem;
+      color: var(--text-lt);
+      letter-spacing: 0.08em;
+    }
+    .hero-msg {
+      margin-top: 2.2rem;
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: 1.15rem;
+      color: var(--text-lt);
+      max-width: 480px;
+      line-height: 1.8;
+    }
+
+    /* countdown */
+    .countdown {
+      display: flex; gap: 1.6rem;
+      margin-top: 3rem;
+      justify-content: center;
+    }
+    .cd-item {
+      display: flex; flex-direction: column; align-items: center;
+    }
+    .cd-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 3rem;
+      font-weight: 300;
+      color: var(--text);
+      line-height: 1;
+      min-width: 2.8ch;
+      text-align: center;
+    }
+    .cd-label {
+      font-size: 0.6rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-top: 0.3rem;
+    }
+    .cd-sep {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.5rem;
+      color: var(--gold-lt);
+      align-self: flex-start;
+      padding-top: 0.1rem;
+    }
+
+    /* scroll hint */
+    .scroll-hint {
+      position: absolute; bottom: 2rem; left: 50%; transform: translateX(-50%);
+      display: flex; flex-direction: column; align-items: center; gap: 0.5rem;
+      opacity: 0.45; animation: bounce 2s ease-in-out infinite;
+    }
+    .scroll-hint span { font-size: 0.6rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--gold-dk); }
+    @keyframes bounce { 0%,100%{transform:translateX(-50%) translateY(0)} 50%{transform:translateX(-50%) translateY(6px)} }
+
+    /* ── SECTIONS COMMON ──────────────────────────────── */
+    section { padding: 90px 2rem; }
+    section:nth-child(even) { background: var(--ivory-2); }
+
+    .section-inner {
+      max-width: 860px;
+      margin: 0 auto;
+    }
+    .section-inner.wide { max-width: 1060px; }
+
+    .eyebrow {
+      font-size: 0.65rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 0.6rem;
+      text-align: center;
+    }
+    .section-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2rem, 4vw, 2.8rem);
+      font-weight: 300;
+      text-align: center;
+      color: var(--text);
+      line-height: 1.2;
+      margin-bottom: 0.5rem;
+    }
+    .section-title em { font-style: italic; color: var(--gold-dk); }
+    .divider {
+      width: 60px; height: 1px;
+      background: var(--gold);
+      margin: 1.4rem auto;
+      opacity: 0.5;
+    }
+
+    /* ── O CASAL ─────────────────────────────────────── */
+    .couple-text {
+      text-align: center;
+      color: var(--text-lt);
+      font-size: 1rem;
+      line-height: 1.9;
+      max-width: 620px;
+      margin: 0 auto 3rem;
+    }
+    .photo-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+    }
+    .photo-grid .photo {
+      border-radius: 2px;
+      overflow: hidden;
+      aspect-ratio: 3/4;
+      background: var(--gold-lt);
+      position: relative;
+    }
+    .photo-grid .photo.tall { aspect-ratio: 3/5; grid-row: span 2; }
+    .photo-grid .photo img {
+      width: 100%; height: 100%; object-fit: cover;
+      display: block; transition: transform .5s ease;
+    }
+    .photo-grid .photo:hover img { transform: scale(1.03); }
+    /* placeholder gradient for demo photos */
+    .photo-ph {
+      width: 100%; height: 100%;
+      background: linear-gradient(135deg, var(--gold-lt) 0%, var(--gold) 100%);
+      display: flex; align-items: center; justify-content: center;
+    }
+    .photo-ph svg { opacity: 0.25; }
+
+    @media(max-width: 600px) {
+      .photo-grid { grid-template-columns: repeat(2, 1fr); }
+      .photo-grid .photo.tall { aspect-ratio: 3/4; grid-row: span 1; }
+    }
+
+    /* ── PADRINHOS ────────────────────────────────────── */
+    .padrinhos-text {
+      text-align: center;
+      color: var(--text-lt);
+      max-width: 540px;
+      margin: 0 auto 3rem;
+    }
+    .padrinhos-groups {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+    }
+    .padrinhos-group h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.1rem;
+      font-style: italic;
+      color: var(--gold-dk);
+      text-align: center;
+      margin-bottom: 1.2rem;
+      letter-spacing: 0.04em;
+    }
+    .padrinhos-list {
+      list-style: none;
+      display: flex; flex-direction: column; gap: 0.7rem;
+    }
+    .padrinhos-list li {
+      text-align: center;
+      font-size: 0.92rem;
+      color: var(--text);
+      padding: 0.5rem 1rem;
+      border: 1px solid var(--gold-lt);
+      border-radius: 1px;
+      background: rgba(255,255,255,0.5);
+    }
+    @media(max-width: 600px) {
+      .padrinhos-groups { grid-template-columns: 1fr; gap: 2rem; }
+    }
+
+    /* ── CERIMÔNIA ────────────────────────────────────── */
+    .ceremony-cards {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      margin-top: 2.5rem;
+    }
+    .ceremony-card {
+      background: var(--white);
+      padding: 2rem;
+      border: 1px solid var(--gold-lt);
+      border-radius: 2px;
+      text-align: center;
+    }
+    .ceremony-card .card-icon { color: var(--gold); font-size: 1.6rem; margin-bottom: 1rem; }
+    .ceremony-card h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.25rem;
+      color: var(--text);
+      margin-bottom: 0.8rem;
+      font-weight: 400;
+    }
+    .ceremony-card p { font-size: 0.9rem; color: var(--text-lt); line-height: 1.8; }
+    .ceremony-card strong { color: var(--text); font-weight: 700; }
+    .map-wrap {
+      margin-top: 2.5rem;
+      border: 1px solid var(--gold-lt);
+      border-radius: 2px;
+      overflow: hidden;
+      height: 280px;
+    }
+    .map-wrap iframe { width: 100%; height: 100%; border: 0; }
+    @media(max-width: 600px) {
+      .ceremony-cards { grid-template-columns: 1fr; }
+    }
+
+    /* ── PRESENTES ────────────────────────────────────── */
+    .gifts-controls {
+      display: flex; gap: 1rem; margin-bottom: 2rem; flex-wrap: wrap; align-items: center;
+    }
+    .gifts-controls label { font-size: 0.78rem; color: var(--text-lt); letter-spacing: 0.06em; }
+    .gifts-controls select {
+      border: 1px solid var(--gold-lt);
+      background: var(--white);
+      padding: 0.45rem 0.9rem;
+      font-family: 'Lato', sans-serif;
+      font-size: 0.82rem;
+      color: var(--text);
+      border-radius: 1px;
+      cursor: pointer;
+    }
+    .cart-info {
+      margin-left: auto;
+      font-size: 0.8rem;
+      color: var(--gold-dk);
+      display: flex; align-items: center; gap: 0.5rem;
+    }
+    .gift-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+      gap: 1.4rem;
+    }
+    .gift-card {
+      background: var(--white);
+      border: 1px solid var(--gold-lt);
+      border-radius: 2px;
+      overflow: hidden;
+      display: flex; flex-direction: column;
+      transition: box-shadow .2s;
+    }
+    .gift-card:hover { box-shadow: 0 4px 18px rgba(0,0,0,0.07); }
+    .gift-img {
+      aspect-ratio: 4/3;
+      background: linear-gradient(135deg, var(--gold-lt), var(--gold));
+      display: flex; align-items: center; justify-content: center;
+      font-size: 2.4rem;
+    }
+    .gift-info { padding: 1rem 1rem 1.2rem; flex: 1; display: flex; flex-direction: column; }
+    .gift-info h4 { font-family: 'Cormorant Garamond', serif; font-size: 1.05rem; font-weight: 400; color: var(--text); margin-bottom: 0.3rem; }
+    .gift-info .price { font-size: 0.85rem; color: var(--gold-dk); font-weight: 700; margin-bottom: 0.8rem; }
+    .gift-info .desc { font-size: 0.78rem; color: var(--text-lt); flex: 1; margin-bottom: 1rem; line-height: 1.6; }
+    .btn-gift {
+      background: var(--gold);
+      color: var(--white);
+      border: none; cursor: pointer;
+      padding: 0.55rem 1.2rem;
+      font-family: 'Lato', sans-serif;
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      border-radius: 1px;
+      transition: background .2s;
+      align-self: stretch;
+    }
+    .btn-gift:hover { background: var(--gold-dk); }
+    .btn-gift.added { background: #7a9e7e; }
+
+    /* ── RSVP ─────────────────────────────────────────── */
+    .form-card {
+      background: var(--white);
+      border: 1px solid var(--gold-lt);
+      border-radius: 2px;
+      padding: 2.5rem;
+      max-width: 640px;
+      margin: 0 auto;
+    }
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+    .form-group {
+      display: flex; flex-direction: column; gap: 0.4rem;
+      margin-bottom: 1.2rem;
+    }
+    .form-group label {
+      font-size: 0.7rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-lt);
+    }
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      border: 1px solid var(--gold-lt);
+      background: var(--ivory);
+      padding: 0.7rem 0.9rem;
+      font-family: 'Lato', sans-serif;
+      font-size: 0.9rem;
+      color: var(--text);
+      border-radius: 1px;
+      outline: none;
+      transition: border-color .2s;
+      width: 100%;
+    }
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus { border-color: var(--gold); }
+    .form-group textarea { resize: vertical; min-height: 90px; }
+
+    .radio-group {
+      display: flex; gap: 1.2rem; flex-wrap: wrap;
+    }
+    .radio-group label {
+      display: flex; align-items: center; gap: 0.5rem;
+      font-size: 0.88rem; color: var(--text);
+      text-transform: none; letter-spacing: 0;
+      cursor: pointer;
+    }
+
+    .check-group { display: flex; flex-direction: column; gap: 0.7rem; margin-bottom: 1.4rem; }
+    .check-group label {
+      display: flex; gap: 0.7rem; align-items: flex-start;
+      font-size: 0.8rem; color: var(--text-lt);
+      text-transform: none; letter-spacing: 0;
+      cursor: pointer; line-height: 1.5;
+    }
+    .check-group input[type=checkbox] { margin-top: 2px; accent-color: var(--gold); }
+
+    .btn-primary {
+      background: var(--gold);
+      color: var(--white);
+      border: none; cursor: pointer;
+      padding: 0.8rem 2.5rem;
+      font-family: 'Lato', sans-serif;
+      font-size: 0.78rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      border-radius: 1px;
+      transition: background .2s;
+      display: block; width: 100%;
+      margin-top: 0.5rem;
+    }
+    .btn-primary:hover { background: var(--gold-dk); }
+    .form-success {
+      display: none;
+      text-align: center;
+      padding: 2rem;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.2rem;
+      font-style: italic;
+      color: var(--gold-dk);
+    }
+
+    @media(max-width: 600px) {
+      .form-row { grid-template-columns: 1fr; }
+      .form-card { padding: 1.5rem; }
+    }
+
+    /* ── RECADOS ──────────────────────────────────────── */
+    .messages-list {
+      display: flex; flex-direction: column; gap: 1.2rem;
+      margin-top: 2.5rem;
+    }
+    .message-bubble {
+      background: var(--white);
+      border-left: 3px solid var(--gold);
+      padding: 1.2rem 1.4rem;
+      border-radius: 0 2px 2px 0;
+    }
+    .message-bubble .msg-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1rem; font-weight: 600;
+      color: var(--gold-dk); margin-bottom: 0.3rem;
+    }
+    .message-bubble .msg-text { font-size: 0.9rem; color: var(--text-lt); font-style: italic; }
+
+    /* ── FOOTER ───────────────────────────────────────── */
+    footer {
+      background: var(--text);
+      color: rgba(255,255,255,0.4);
+      text-align: center;
+      padding: 2.5rem 2rem;
+      font-size: 0.75rem;
+      letter-spacing: 0.08em;
+    }
+    footer .footer-names {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.4rem;
+      font-style: italic;
+      color: var(--gold);
+      display: block;
+      margin-bottom: 0.6rem;
+    }
+
+    /* ── TOAST ────────────────────────────────────────── */
+    .toast {
+      position: fixed; bottom: 2rem; left: 50%; transform: translateX(-50%) translateY(8px);
+      background: var(--text);
+      color: var(--white);
+      padding: 0.7rem 1.5rem;
+      border-radius: 2px;
+      font-size: 0.82rem;
+      letter-spacing: 0.06em;
+      opacity: 0;
+      transition: opacity .3s, transform .3s;
+      pointer-events: none;
+      z-index: 999;
+      white-space: nowrap;
+    }
+    .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+  </style>
+</head>
+<body>
+
+<!-- ── NAV ─────────────────────────────────────────────── -->
+<nav>
+  <span class="nav-logo">Angela & Roberto</span>
+  <button class="hamburger" id="hbg" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#home" onclick="closeMenu()">Início</a></li>
+    <li><a href="#casal" onclick="closeMenu()">O Casal</a></li>
+    <li><a href="#padrinhos" onclick="closeMenu()">Padrinhos</a></li>
+    <li><a href="#cerimonia" onclick="closeMenu()">Cerimônia</a></li>
+    <li><a href="#presentes" onclick="closeMenu()">Presentes</a></li>
+    <li><a href="#rsvp" onclick="closeMenu()">Confirmar</a></li>
+    <li><a href="#recados" onclick="closeMenu()">Recados</a></li>
+  </ul>
+</nav>
+
+<!-- ── HERO ─────────────────────────────────────────────── -->
+<section id="home">
+  <p class="hero-date">30 de Junho de 2027</p>
+  <h1 class="hero-names">
+    <em>Angela</em><br>
+    <span style="font-size:0.45em;letter-spacing:.18em;font-family:'Lato',sans-serif;font-weight:300;color:var(--gold);display:block;margin:.3em 0">&amp;</span>
+    <em>Roberto</em>
+  </h1>
+
+  <div class="ornament" style="margin-top:1.6rem;">
+    <svg width="180" height="20" viewBox="0 0 180 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <line x1="0" y1="10" x2="72" y2="10" stroke="#C9A96E" stroke-width="0.8"/>
+      <circle cx="90" cy="10" r="3" stroke="#C9A96E" stroke-width="0.8"/>
+      <path d="M82 10 Q86 5 90 10 Q94 5 98 10" stroke="#C9A96E" stroke-width="0.8" fill="none"/>
+      <line x1="108" y1="10" x2="180" y2="10" stroke="#C9A96E" stroke-width="0.8"/>
+    </svg>
+  </div>
+
+  <p class="hero-msg">
+    "Com todo o amor do mundo, convidamos você<br>para celebrar o início da nossa história juntos."
+  </p>
+
+  <!-- countdown -->
+  <div class="countdown">
+    <div class="cd-item"><span class="cd-num" id="cd-d">000</span><span class="cd-label">Dias</span></div>
+    <div class="cd-sep">·</div>
+    <div class="cd-item"><span class="cd-num" id="cd-h">00</span><span class="cd-label">Horas</span></div>
+    <div class="cd-sep">·</div>
+    <div class="cd-item"><span class="cd-num" id="cd-m">00</span><span class="cd-label">Min</span></div>
+    <div class="cd-sep">·</div>
+    <div class="cd-item"><span class="cd-num" id="cd-s">00</span><span class="cd-label">Seg</span></div>
+  </div>
+
+  <div class="scroll-hint">
+    <span>Rolar</span>
+    <svg width="14" height="20" viewBox="0 0 14 20" fill="none"><rect x="1" y="1" width="12" height="18" rx="6" stroke="#8B7355" stroke-width="1.2"/><circle cx="7" cy="5" r="2" fill="#8B7355"><animate attributeName="cy" values="5;13;5" dur="1.6s" repeatCount="indefinite"/></circle></svg>
+  </div>
+</section>
+
+<!-- ── O CASAL ─────────────────────────────────────────── -->
+<section id="casal">
+  <div class="section-inner">
+    <p class="eyebrow">Nossa História</p>
+    <h2 class="section-title">O <em>Casal</em></h2>
+    <div class="divider"></div>
+
+    <p class="couple-text">
+      Tudo começou numa tarde de outubro de 2019, numa pequena livraria no centro da cidade. Angela procurava um livro de poemas; Roberto estava perdido entre as estantes. Um sorriso acidental, uma recomendação tímida, e o que era um encontro casual tornou-se a maior história das nossas vidas.<br><br>
+      Quatro anos de viagens, de risos e de crescimento juntos nos trouxeram até aqui — prontos para dizer "sim" diante de todas as pessoas que amamos.
+    </p>
+
+    <!-- Photo grid with placeholders -->
+    <div class="photo-grid">
+      <div class="photo tall">
+        <div class="photo-ph">
+          <svg width="48" height="48" viewBox="0 0 48 48" fill="none"><path d="M24 8 C14 8 6 16 6 24 C6 35 24 44 24 44 C24 44 42 35 42 24 C42 16 34 8 24 8Z" fill="white"/></svg>
+        </div>
+      </div>
+      <div class="photo">
+        <div class="photo-ph">
+          <svg width="36" height="36" viewBox="0 0 36 36" fill="none"><circle cx="18" cy="14" r="6" stroke="white" stroke-width="1.5"/><path d="M6 32c0-6.627 5.373-12 12-12s12 5.373 12 12" stroke="white" stroke-width="1.5" fill="none"/></svg>
+        </div>
+      </div>
+      <div class="photo">
+        <div class="photo-ph">
+          <svg width="36" height="36" viewBox="0 0 36 36" fill="none"><rect x="4" y="8" width="28" height="20" rx="2" stroke="white" stroke-width="1.5"/><circle cx="18" cy="18" r="5" stroke="white" stroke-width="1.5"/></svg>
+        </div>
+      </div>
+      <div class="photo">
+        <div class="photo-ph" style="background:linear-gradient(135deg,#E8D5B7,#C9A96E);">
+          <svg width="36" height="36" viewBox="0 0 36 36" fill="none"><path d="M18 6L20.9 13.7H29L22.6 18.6L25.5 26.3L18 21.4L10.5 26.3L13.4 18.6L7 13.7H15.1L18 6Z" stroke="white" stroke-width="1.5" fill="none"/></svg>
+        </div>
+      </div>
+      <div class="photo">
+        <div class="photo-ph" style="background:linear-gradient(135deg,#D4B896,#8B7355);">
+          <svg width="36" height="36" viewBox="0 0 36 36" fill="none"><path d="M18 8 C12 8 7 13 7 18 C7 26 18 32 18 32 C18 32 29 26 29 18 C29 13 24 8 18 8Z" fill="white" opacity="0.8"/></svg>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── PADRINHOS ───────────────────────────────────────── -->
+<section id="padrinhos">
+  <div class="section-inner">
+    <p class="eyebrow">Com carinho especial</p>
+    <h2 class="section-title"><em>Padrinhos</em> & Madrinhas</h2>
+    <div class="divider"></div>
+    <p class="padrinhos-text">
+      Escolhemos cada um de vocês com o coração cheio de gratidão. Obrigado por fazerem parte da nossa caminhada e por nos acompanharem nesse momento tão especial. Vocês são a nossa segunda família.
+    </p>
+
+    <div class="padrinhos-groups">
+      <div class="padrinhos-group">
+        <h3>Padrinhos</h3>
+        <ul class="padrinhos-list">
+          <li>Carlos Eduardo Martins</li>
+          <li>Felipe Rodrigues</li>
+          <li>Marcelo Henrique Costa</li>
+          <li>Lucas Fernandes</li>
+        </ul>
+      </div>
+      <div class="padrinhos-group">
+        <h3>Madrinhas</h3>
+        <ul class="padrinhos-list">
+          <li>Juliana Carvalho</li>
+          <li>Isabela Santos</li>
+          <li>Fernanda Lima</li>
+          <li>Camila Oliveira</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── CERIMÔNIA ──────────────────────────────────────── -->
+<section id="cerimonia">
+  <div class="section-inner">
+    <p class="eyebrow">O Grande Dia</p>
+    <h2 class="section-title">A <em>Cerimônia</em></h2>
+    <div class="divider"></div>
+
+    <div class="ceremony-cards">
+      <div class="ceremony-card">
+        <div class="card-icon">♡</div>
+        <h3>Cerimônia Religiosa</h3>
+        <p>
+          <strong>30 de Junho de 2027</strong><br>
+          Às 16h30 — Recepção a partir das 16h<br><br>
+          Igreja Nossa Senhora das Graças<br>
+          Rua das Flores, 245 — Centro<br>
+          São Paulo — SP
+        </p>
+      </div>
+      <div class="ceremony-card">
+        <div class="card-icon">✦</div>
+        <h3>Recepção & Festa</h3>
+        <p>
+          <strong>A partir das 19h</strong><br>
+          Jantar, dança e muito amor<br><br>
+          Espaço Villa Bella<br>
+          Av. Jardins, 1200 — Moema<br>
+          São Paulo — SP
+        </p>
+      </div>
+    </div>
+
+    <div class="map-wrap">
+      <!-- Using OpenStreetMap as embed (no API key needed) -->
+      <iframe
+        title="Localização da Cerimônia"
+        src="https://www.openstreetmap.org/export/embed.html?bbox=-46.67,-23.57,-46.63,-23.54&layer=mapnik"
+        loading="lazy">
+      </iframe>
+    </div>
+  </div>
+</section>
+
+<!-- ── PRESENTES ──────────────────────────────────────── -->
+<section id="presentes">
+  <div class="section-inner wide">
+    <p class="eyebrow">Lista de</p>
+    <h2 class="section-title"><em>Presentes</em></h2>
+    <div class="divider"></div>
+    <p style="text-align:center;color:var(--text-lt);margin-bottom:2rem;font-size:.9rem;">
+      Sua presença é o maior presente. Mas se quiser nos dar algo especial, aqui estão algumas sugestões ♡
+    </p>
+
+    <div class="gifts-controls">
+      <label>Ordenar por</label>
+      <select id="sort-select" onchange="sortGifts()">
+        <option value="default">Destaques</option>
+        <option value="az">A–Z</option>
+        <option value="asc">Menor preço</option>
+        <option value="desc">Maior preço</option>
+      </select>
+      <div class="cart-info">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M1 1h2l1.5 7h8l1.5-5H4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/><circle cx="7" cy="13.5" r="1" fill="currentColor"/><circle cx="12" cy="13.5" r="1" fill="currentColor"/></svg>
+        <span id="cart-count">0 item(s) presenteado(s)</span>
+      </div>
+    </div>
+
+    <div class="gift-grid" id="giftGrid"></div>
+  </div>
+</section>
+
+<!-- ── RSVP ───────────────────────────────────────────── -->
+<section id="rsvp">
+  <div class="section-inner">
+    <p class="eyebrow">Confirme sua</p>
+    <h2 class="section-title"><em>Presença</em></h2>
+    <div class="divider"></div>
+    <p style="text-align:center;color:var(--text-lt);margin-bottom:2rem;font-size:.9rem;">
+      Por favor, confirme sua presença até <strong>30 de Abril de 2027</strong>.
+    </p>
+
+    <div class="form-card">
+      <div id="rsvpForm">
+        <div class="form-group">
+          <label>Nome Completo *</label>
+          <input type="text" id="rsvp-name" placeholder="Seu nome completo" />
+        </div>
+
+        <div class="form-group">
+          <label>Você vai comparecer? *</label>
+          <div class="radio-group">
+            <label><input type="radio" name="attending" value="yes"> Sim, estarei lá!</label>
+            <label><input type="radio" name="attending" value="no"> Infelizmente não poderei</label>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label>Número de Adultos</label>
+            <select id="rsvp-adults">
+              <option>1</option><option>2</option><option>3</option><option>4</option><option>5+</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Número de Crianças</label>
+            <select id="rsvp-kids">
+              <option>0</option><option>1</option><option>2</option><option>3</option><option>4+</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label>E-mail *</label>
+            <input type="email" id="rsvp-email" placeholder="seu@email.com" />
+          </div>
+          <div class="form-group">
+            <label>Telefone / WhatsApp</label>
+            <input type="tel" id="rsvp-phone" placeholder="(00) 00000-0000" />
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>Observações</label>
+          <textarea id="rsvp-obs" placeholder="Restrições alimentares, necessidades especiais..."></textarea>
+        </div>
+
+        <div class="check-group">
+          <label><input type="checkbox" id="rsvp-terms"> Li e aceito os <a href="#" style="color:var(--gold-dk)">Termos de Uso</a> e a <a href="#" style="color:var(--gold-dk)">Política de Privacidade</a></label>
+          <label><input type="checkbox" id="rsvp-news"> Quero receber informações e atualizações sobre o casamento</label>
+        </div>
+
+        <button class="btn-primary" onclick="submitRSVP()">Confirmar Presença</button>
+      </div>
+      <div class="form-success" id="rsvpSuccess">
+        ♡ Obrigado pela confirmação! <br>Mal podemos esperar para celebrar com você.
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── RECADOS ─────────────────────────────────────────── -->
+<section id="recados">
+  <div class="section-inner">
+    <p class="eyebrow">Deixe sua</p>
+    <h2 class="section-title"><em>Mensagem</em></h2>
+    <div class="divider"></div>
+    <p style="text-align:center;color:var(--text-lt);margin-bottom:2rem;font-size:.9rem;">
+      Deixe um recado especial para os noivos. Cada palavra significa muito para nós ♡
+    </p>
+
+    <div class="form-card">
+      <div id="msgForm">
+        <div class="form-row">
+          <div class="form-group">
+            <label>Seu Nome *</label>
+            <input type="text" id="msg-name" placeholder="Seu nome" />
+          </div>
+          <div class="form-group">
+            <label>E-mail</label>
+            <input type="email" id="msg-email" placeholder="seu@email.com" />
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Seu Recado *</label>
+          <textarea id="msg-text" placeholder="Escreva aqui sua mensagem para os noivos..." style="min-height:130px"></textarea>
+        </div>
+        <div class="check-group">
+          <label><input type="checkbox" id="msg-terms"> Li e aceito os <a href="#" style="color:var(--gold-dk)">Termos de Uso</a> e a <a href="#" style="color:var(--gold-dk)">Política de Privacidade</a></label>
+        </div>
+        <button class="btn-primary" onclick="submitMsg()">Enviar Recado</button>
+      </div>
+      <div class="form-success" id="msgSuccess">
+        ♡ Mensagem enviada! <br>Iremos guardar suas palavras para sempre.
+      </div>
+    </div>
+
+    <!-- Existing messages -->
+    <div class="messages-list" id="msgList">
+      <div class="message-bubble">
+        <div class="msg-name">Maria Lucia Teixeira</div>
+        <div class="msg-text">"Que essa união seja repleta de amor, cumplicidade e muita felicidade. Vocês merecem cada momento lindo que está por vir!"</div>
+      </div>
+      <div class="message-bubble">
+        <div class="msg-name">João Paulo Ferreira</div>
+        <div class="msg-text">"Angela e Roberto, desde o dia em que vocês se conheceram eu sabia que era para sempre. Que alegria poder celebrar com vocês!"</div>
+      </div>
+      <div class="message-bubble">
+        <div class="msg-name">Família Andrade</div>
+        <div class="msg-text">"Que Deus abençoe cada passo dessa nova jornada. Estamos com o coração cheio de emoção e gratidão por fazerem parte das nossas vidas."</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── FOOTER ─────────────────────────────────────────── -->
+<footer>
+  <em class="footer-names">Angela & Roberto</em>
+  30 · 06 · 2027 &nbsp;—&nbsp; São Paulo, SP<br>
+  <span style="margin-top:.6rem;display:block">Feito com ♡ para o nosso grande dia</span>
+</footer>
+
+<!-- Toast -->
+<div class="toast" id="toast"></div>
+
+<script>
+  /* ── NAV MOBILE ──────────────────────────────────────── */
+  document.getElementById('hbg').addEventListener('click', () => {
+    document.getElementById('navLinks').classList.toggle('open');
+  });
+  function closeMenu() {
+    document.getElementById('navLinks').classList.remove('open');
+  }
+
+  /* ── COUNTDOWN ───────────────────────────────────────── */
+  const weddingDate = new Date('2027-06-30T16:30:00');
+  function updateCountdown() {
+    const diff = weddingDate - new Date();
+    if (diff <= 0) {
+      document.querySelector('.countdown').innerHTML = '<p style="color:var(--gold-dk);font-family:\'Cormorant Garamond\',serif;font-size:1.5rem;font-style:italic">O grande dia chegou! ♡</p>';
+      return;
+    }
+    const d = Math.floor(diff / 86400000);
+    const h = Math.floor((diff % 86400000) / 3600000);
+    const m = Math.floor((diff % 3600000) / 60000);
+    const s = Math.floor((diff % 60000) / 1000);
+    document.getElementById('cd-d').textContent = String(d).padStart(3,'0');
+    document.getElementById('cd-h').textContent = String(h).padStart(2,'0');
+    document.getElementById('cd-m').textContent = String(m).padStart(2,'0');
+    document.getElementById('cd-s').textContent = String(s).padStart(2,'0');
+  }
+  updateCountdown();
+  setInterval(updateCountdown, 1000);
+
+  /* ── GIFTS ───────────────────────────────────────────── */
+  const gifts = [
+    { id:1, name:'Cota de Lua de Mel', price:250, emoji:'✈️', desc:'Ajude-nos a viver uma viagem inesquecível para a nossa lua de mel.' },
+    { id:2, name:'Jogo de Panelas Premium', price:890, emoji:'🍳', desc:'Conjunto de panelas antiaderentes de alta qualidade para equipar nossa cozinha.' },
+    { id:3, name:'Máquina de Café Espresso', price:1200, emoji:'☕', desc:'Para começar cada manhã juntos com o café perfeito.' },
+    { id:4, name:'Aparelho de Jantar', price:480, emoji:'🍽️', desc:'Conjunto completo de pratos, tigelas e xícaras para receber com elegância.' },
+    { id:5, name:'Kit Cama & Mesa', price:320, emoji:'🛏️', desc:'Lençóis de algodão egípcio e toalhas finas para o novo lar.' },
+    { id:6, name:'Smart TV 55"', price:2800, emoji:'📺', desc:'Para as noites de filme e relaxamento no novo lar.' },
+    { id:7, name:'Robô Aspirador', price:1500, emoji:'🤖', desc:'Porque o tempo livre é valioso para quem está construindo uma vida juntos.' },
+    { id:8, name:'Kit Churrasco', price:390, emoji:'🔥', desc:'Tudo para os churrascos do casal: churrasqueira, utensílios e muito mais.' },
+  ];
+
+  let cartCount = 0;
+  let addedIds = new Set();
+
+  function renderGifts(list) {
+    const grid = document.getElementById('giftGrid');
+    grid.innerHTML = list.map(g => `
+      <div class="gift-card" data-id="${g.id}">
+        <div class="gift-img">${g.emoji}</div>
+        <div class="gift-info">
+          <h4>${g.name}</h4>
+          <p class="price">R$ ${g.price.toLocaleString('pt-BR')},00</p>
+          <p class="desc">${g.desc}</p>
+          <button class="btn-gift ${addedIds.has(g.id)?'added':''}"
+            onclick="addGift(${g.id}, this)">
+            ${addedIds.has(g.id) ? '✓ Presenteado' : 'Presentear'}
+          </button>
+        </div>
+      </div>
+    `).join('');
+  }
+
+  function sortGifts() {
+    const v = document.getElementById('sort-select').value;
+    let list = [...gifts];
+    if (v === 'az') list.sort((a,b) => a.name.localeCompare(b.name));
+    else if (v === 'asc') list.sort((a,b) => a.price - b.price);
+    else if (v === 'desc') list.sort((a,b) => b.price - a.price);
+    renderGifts(list);
+  }
+
+  function addGift(id, btn) {
+    if (addedIds.has(id)) return;
+    addedIds.add(id);
+    cartCount++;
+    document.getElementById('cart-count').textContent = cartCount + ' item(s) presenteado(s)';
+    btn.textContent = '✓ Presenteado';
+    btn.classList.add('added');
+    showToast('Presente adicionado! Obrigado pelo carinho ♡');
+  }
+
+  renderGifts(gifts);
+
+  /* ── FORMS ───────────────────────────────────────────── */
+  function showToast(msg) {
+    const t = document.getElementById('toast');
+    t.textContent = msg;
+    t.classList.add('show');
+    setTimeout(() => t.classList.remove('show'), 3000);
+  }
+
+  function submitRSVP() {
+    const name = document.getElementById('rsvp-name').value.trim();
+    const email = document.getElementById('rsvp-email').value.trim();
+    const terms = document.getElementById('rsvp-terms').checked;
+    const attending = document.querySelector('input[name="attending"]:checked');
+
+    if (!name) { showToast('Por favor, informe seu nome.'); return; }
+    if (!email) { showToast('Por favor, informe seu e-mail.'); return; }
+    if (!attending) { showToast('Por favor, confirme se irá comparecer.'); return; }
+    if (!terms) { showToast('Aceite os Termos de Uso para continuar.'); return; }
+
+    document.getElementById('rsvpForm').style.display = 'none';
+    document.getElementById('rsvpSuccess').style.display = 'block';
+  }
+
+  function submitMsg() {
+    const name = document.getElementById('msg-name').value.trim();
+    const text = document.getElementById('msg-text').value.trim();
+    const terms = document.getElementById('msg-terms').checked;
+
+    if (!name) { showToast('Por favor, informe seu nome.'); return; }
+    if (!text) { showToast('Escreva uma mensagem para os noivos.'); return; }
+    if (!terms) { showToast('Aceite os Termos de Uso para continuar.'); return; }
+
+    // Add to list
+    const list = document.getElementById('msgList');
+    const el = document.createElement('div');
+    el.className = 'message-bubble';
+    el.innerHTML = `<div class="msg-name">${name}</div><div class="msg-text">"${text}"</div>`;
+    list.prepend(el);
+
+    document.getElementById('msgForm').style.display = 'none';
+    document.getElementById('msgSuccess').style.display = 'block';
+  }
+</script>
+</body>
+</html>
