@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Master & Kayky — 30.06.2027</title>
+  <title>Kathelly & Kayky — 30.06.2027</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Lato:wght@300;400;700&display=swap" rel="stylesheet" />
   <style>
@@ -142,35 +142,42 @@
 
     /* countdown */
     .countdown {
-      display: flex; gap: 1.6rem;
+      display: flex;
+      gap: clamp(0.6rem, 3vw, 1.6rem);
       margin-top: 3rem;
       justify-content: center;
+      flex-wrap: nowrap;
+      width: 100%;
+      max-width: 480px;
     }
     .cd-item {
       display: flex; flex-direction: column; align-items: center;
+      flex: 1;
     }
     .cd-num {
       font-family: 'Cormorant Garamond', serif;
-      font-size: 3rem;
+      font-size: clamp(2rem, 9vw, 3rem);
       font-weight: 300;
       color: var(--text);
       line-height: 1;
-      min-width: 2.8ch;
       text-align: center;
+      width: 100%;
     }
     .cd-label {
-      font-size: 0.6rem;
-      letter-spacing: 0.18em;
+      font-size: clamp(0.48rem, 1.5vw, 0.6rem);
+      letter-spacing: 0.14em;
       text-transform: uppercase;
       color: var(--gold);
       margin-top: 0.3rem;
+      white-space: nowrap;
     }
     .cd-sep {
       font-family: 'Cormorant Garamond', serif;
-      font-size: 2.5rem;
+      font-size: clamp(1.6rem, 6vw, 2.5rem);
       color: var(--gold-lt);
       align-self: flex-start;
-      padding-top: 0.1rem;
+      padding-top: 0.05rem;
+      flex-shrink: 0;
     }
 
     /* scroll hint */
@@ -225,6 +232,54 @@
       line-height: 1.9;
       max-width: 620px;
       margin: 0 auto 3rem;
+    }
+    /* story timeline */
+    .story-blocks {
+      display: flex; flex-direction: column;
+      max-width: 640px; margin: 0 auto 2.5rem;
+      position: relative;
+    }
+    .story-blocks::before {
+      content: '';
+      position: absolute; left: 17px; top: 10px; bottom: 10px; width: 1px;
+      background: linear-gradient(to bottom, transparent, var(--gold-lt) 15%, var(--gold-lt) 85%, transparent);
+    }
+    .story-block {
+      display: flex; gap: 1.6rem; align-items: flex-start;
+      padding: 1.4rem 0;
+    }
+    .story-icon {
+      flex-shrink: 0;
+      width: 34px; height: 34px;
+      border-radius: 50%;
+      background: var(--ivory-2);
+      border: 1px solid var(--gold);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.65rem; color: var(--gold);
+      position: relative; z-index: 1;
+      margin-top: 0.1rem;
+    }
+    .story-content { flex: 1; }
+    .story-year {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.05rem; font-weight: 400; font-style: italic;
+      color: var(--gold-dk); margin-bottom: 0.45rem;
+    }
+    .story-content p {
+      font-size: 0.9rem; color: var(--text-lt); line-height: 1.85;
+    }
+    .couple-quote {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: 1.18rem;
+      color: var(--gold-dk);
+      text-align: center;
+      max-width: 520px;
+      margin: 0 auto 3rem;
+      line-height: 1.85;
+      padding: 1.6rem 1.5rem;
+      border-top: 1px solid var(--gold-lt);
+      border-bottom: 1px solid var(--gold-lt);
     }
     .photo-grid {
       display: grid;
@@ -542,7 +597,7 @@
 
 <!-- ── NAV ─────────────────────────────────────────────── -->
 <nav>
-  <span class="nav-logo">Master & Kayky</span>
+  <span class="nav-logo">Kathelly & Kayky</span>
   <button class="hamburger" id="hbg" aria-label="Menu">
     <span></span><span></span><span></span>
   </button>
@@ -561,7 +616,7 @@
 <section id="home">
   <p class="hero-date">30 de Junho de 2027</p>
   <h1 class="hero-names">
-    <em>Master</em><br>
+    <em>Kathelly</em><br>
     <span style="font-size:0.45em;letter-spacing:.18em;font-family:'Lato',sans-serif;font-weight:300;color:var(--gold);display:block;margin:.3em 0">&amp;</span>
     <em>Kayky</em>
   </h1>
@@ -580,14 +635,16 @@
   </p>
 
   <!-- countdown -->
-  <div class="countdown">
-    <div class="cd-item"><span class="cd-num" id="cd-d">000</span><span class="cd-label">Dias</span></div>
-    <div class="cd-sep">·</div>
-    <div class="cd-item"><span class="cd-num" id="cd-h">00</span><span class="cd-label">Horas</span></div>
-    <div class="cd-sep">·</div>
-    <div class="cd-item"><span class="cd-num" id="cd-m">00</span><span class="cd-label">Min</span></div>
-    <div class="cd-sep">·</div>
-    <div class="cd-item"><span class="cd-num" id="cd-s">00</span><span class="cd-label">Seg</span></div>
+  <div style="width:100%;display:flex;justify-content:center;padding:0 1rem;">
+    <div class="countdown">
+      <div class="cd-item"><span class="cd-num" id="cd-d">000</span><span class="cd-label">Dias</span></div>
+      <div class="cd-sep">·</div>
+      <div class="cd-item"><span class="cd-num" id="cd-h">00</span><span class="cd-label">Horas</span></div>
+      <div class="cd-sep">·</div>
+      <div class="cd-item"><span class="cd-num" id="cd-m">00</span><span class="cd-label">Min</span></div>
+      <div class="cd-sep">·</div>
+      <div class="cd-item"><span class="cd-num" id="cd-s">00</span><span class="cd-label">Seg</span></div>
+    </div>
   </div>
 
   <div class="scroll-hint">
@@ -603,10 +660,44 @@
     <h2 class="section-title">O <em>Casal</em></h2>
     <div class="divider"></div>
 
-    <p class="couple-text">
-      Tudo começou numa tarde de outubro de 2019, numa pequena livraria no centro da cidade. Angela procurava um livro de poemas; Roberto estava perdido entre as estantes. Um sorriso acidental, uma recomendação tímida, e o que era um encontro casual tornou-se a maior história das nossas vidas.<br><br>
-      Quatro anos de viagens, de risos e de crescimento juntos nos trouxeram até aqui — prontos para dizer "sim" diante de todas as pessoas que amamos.
-    </p>
+    <!-- Story blocks -->
+    <div class="story-blocks">
+
+      <div class="story-block">
+        <div class="story-icon">✦</div>
+        <div class="story-content">
+          <h3 class="story-year">Há oito anos</h3>
+          <p>Nossos caminhos se cruzaram pela primeira vez. Durante muito tempo, fomos apenas conhecidos — mas Deus já escrevia, em silêncio, cada capítulo do que viveríamos no futuro.</p>
+        </div>
+      </div>
+
+      <div class="story-block">
+        <div class="story-icon">♡</div>
+        <div class="story-content">
+          <h3 class="story-year">2025 — A amizade que virou amor</h3>
+          <p>Entre conversas, risadas e momentos compartilhados, fomos nos tornando cada vez mais próximos. Foi depois de uma simples corrida juntos que algo mudou em nossos corações. Passamos a nos conhecer de verdade e a perceber que Deus tinha planos maiores para nós.</p>
+        </div>
+      </div>
+
+      <div class="story-block">
+        <div class="story-icon">◇</div>
+        <div class="story-content">
+          <h3 class="story-year">Dezembro de 2025 — O começo oficial</h3>
+          <p>Oficializamos nossa união certos de que aquele sentimento era um presente de Deus. Com Ele à nossa frente e sob a intercessão de Nossa Senhora, aprendemos que o amor verdadeiro vence quilômetros, saudades e dificuldades.</p>
+        </div>
+      </div>
+
+      <div class="story-block">
+        <div class="story-icon">✦</div>
+        <div class="story-content">
+          <h3 class="story-year">2027 — O grande "sim"</h3>
+          <p>Cada despedida fortaleceu nossa esperança; cada reencontro nos lembrou que vale a pena esperar. Hoje, construímos nossa história com fé, amor e propósito — e, pela graça de Deus, nos preparamos para o dia em que diremos nosso "sim" diante do altar.</p>
+        </div>
+      </div>
+
+    </div>
+
+    <p class="couple-quote">"Até aqui, Deus nos sustentou. E temos a certeza de que continuará conduzindo cada passo da nossa história de amor."</p>
 
     <!-- Photo grid with placeholders -->
     <div class="photo-grid">
@@ -688,7 +779,7 @@
           Às 16h30 — Recepção a partir das 16h<br><br>
           Igreja Nossa Senhora das Graças<br>
           Rua das Flores, 245 — Centro<br>
-          Sergipe
+          São Paulo — SP
         </p>
       </div>
       <div class="ceremony-card">
@@ -699,7 +790,7 @@
           Jantar, dança e muito amor<br><br>
           Espaço Villa Bella<br>
           Av. Jardins, 1200 — Moema<br>
-          Sergipe
+          São Paulo — SP
         </p>
       </div>
     </div>
@@ -753,33 +844,26 @@
       Por favor, confirme sua presença até <strong>30 de Abril de 2027</strong>.
     </p>
 
+    <!-- aviso convite individual -->
+    <div style="display:flex;align-items:center;gap:.7rem;background:var(--ivory-2);border:1px solid var(--gold-lt);border-radius:2px;padding:.9rem 1.2rem;max-width:640px;margin:0 auto 1.8rem;">
+      <span style="color:var(--gold);font-size:1.1rem;">♡</span>
+      <p style="font-size:.82rem;color:var(--text-lt);line-height:1.6;">
+        O convite é <strong style="color:var(--text);">individual</strong> — cada convidado confirma a sua presença separadamente.
+      </p>
+    </div>
+
     <div class="form-card">
       <div id="rsvpForm">
         <div class="form-group">
-          <label>Nome Completo *</label>
+          <label>Seu Nome Completo *</label>
           <input type="text" id="rsvp-name" placeholder="Seu nome completo" />
         </div>
 
         <div class="form-group">
           <label>Você vai comparecer? *</label>
           <div class="radio-group">
-            <label><input type="radio" name="attending" value="yes"> Sim, estarei lá!</label>
-            <label><input type="radio" name="attending" value="no"> Infelizmente não poderei</label>
-          </div>
-        </div>
-
-        <div class="form-row">
-          <div class="form-group">
-            <label>Número de Adultos</label>
-            <select id="rsvp-adults">
-              <option>1</option><option>2</option><option>3</option><option>4</option><option>5+</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label>Número de Crianças</label>
-            <select id="rsvp-kids">
-              <option>0</option><option>1</option><option>2</option><option>3</option><option>4+</option>
-            </select>
+            <label><input type="radio" name="attending" value="Sim, estarei lá! 🎉"> Sim, estarei lá!</label>
+            <label><input type="radio" name="attending" value="Infelizmente não poderei"> Infelizmente não poderei</label>
           </div>
         </div>
 
@@ -804,10 +888,12 @@
           <label><input type="checkbox" id="rsvp-news"> Quero receber informações e atualizações sobre o casamento</label>
         </div>
 
-        <button class="btn-primary" onclick="submitRSVP()">Confirmar Presença</button>
+        <button class="btn-primary" id="rsvpBtn" onclick="submitRSVP()">Confirmar Presença</button>
+        <p id="rsvpError" style="display:none;text-align:center;color:#b94a48;font-size:.82rem;margin-top:.8rem;"></p>
       </div>
       <div class="form-success" id="rsvpSuccess">
-        ♡ Obrigado pela confirmação! <br>Mal podemos esperar para celebrar com você.
+        ♡ Confirmação recebida!<br>
+        <span style="font-size:.95rem;color:var(--text-lt);font-family:'Lato',sans-serif;font-style:normal;">Mal podemos esperar para celebrar com você.</span>
       </div>
     </div>
   </div>
@@ -857,7 +943,7 @@
       </div>
       <div class="message-bubble">
         <div class="msg-name">João Paulo Ferreira</div>
-        <div class="msg-text">"Angela e Roberto, desde o dia em que vocês se conheceram eu sabia que era para sempre. Que alegria poder celebrar com vocês!"</div>
+        <div class="msg-text">"Que essa união seja repleta de fé e amor verdadeiro. Mal posso esperar para celebrar esse dia tão especial com vocês!"</div>
       </div>
       <div class="message-bubble">
         <div class="msg-name">Família Andrade</div>
@@ -869,9 +955,9 @@
 
 <!-- ── FOOTER ─────────────────────────────────────────── -->
 <footer>
-  <em class="footer-names">Master & Kayky</em>
-  30 · 06 · 2027 &nbsp;—&nbsp; Sergipe, SP<br>
-  <span style="margin-top:.6rem;display:block">Feito com ♡ por Adson para o nosso grande dia</span>
+  <em class="footer-names">Kathelly & Kayky</em>
+  30 · 06 · 2027 &nbsp;—&nbsp; São Paulo, SP<br>
+  <span style="margin-top:.6rem;display:block">Feito com ♡ e fé para o nosso grande dia</span>
 </footer>
 
 <!-- Toast -->
@@ -968,19 +1054,68 @@
     setTimeout(() => t.classList.remove('show'), 3000);
   }
 
+  // ── CONFIGURAÇÃO ─────────────────────────────────────
+  // Cole aqui a URL gerada pelo Google Apps Script após publicar
+  const APPS_SCRIPT_URL = 'COLE_SUA_URL_AQUI';
+
   function submitRSVP() {
-    const name = document.getElementById('rsvp-name').value.trim();
-    const email = document.getElementById('rsvp-email').value.trim();
-    const terms = document.getElementById('rsvp-terms').checked;
+    const name     = document.getElementById('rsvp-name').value.trim();
+    const email    = document.getElementById('rsvp-email').value.trim();
+    const phone    = document.getElementById('rsvp-phone').value.trim();
+    const obs      = document.getElementById('rsvp-obs').value.trim();
+    const terms    = document.getElementById('rsvp-terms').checked;
     const attending = document.querySelector('input[name="attending"]:checked');
+    const errEl    = document.getElementById('rsvpError');
+    const btn      = document.getElementById('rsvpBtn');
 
-    if (!name) { showToast('Por favor, informe seu nome.'); return; }
-    if (!email) { showToast('Por favor, informe seu e-mail.'); return; }
-    if (!attending) { showToast('Por favor, confirme se irá comparecer.'); return; }
-    if (!terms) { showToast('Aceite os Termos de Uso para continuar.'); return; }
+    errEl.style.display = 'none';
 
-    document.getElementById('rsvpForm').style.display = 'none';
-    document.getElementById('rsvpSuccess').style.display = 'block';
+    if (!name)     { showError('Por favor, informe seu nome.'); return; }
+    if (!email)    { showError('Por favor, informe seu e-mail.'); return; }
+    if (!attending){ showError('Por favor, confirme se irá comparecer.'); return; }
+    if (!terms)    { showError('Aceite os Termos de Uso para continuar.'); return; }
+
+    // Se URL não foi configurada ainda, só mostra sucesso visual
+    if (APPS_SCRIPT_URL === 'COLE_SUA_URL_AQUI') {
+      document.getElementById('rsvpForm').style.display = 'none';
+      document.getElementById('rsvpSuccess').style.display = 'block';
+      return;
+    }
+
+    btn.textContent = 'Enviando...';
+    btn.disabled = true;
+
+    const payload = {
+      nome:       name,
+      email:      email,
+      telefone:   phone || '—',
+      presenca:   attending.value,
+      observacoes: obs || '—',
+      novidades:  document.getElementById('rsvp-news').checked ? 'Sim' : 'Não',
+      data:       new Date().toLocaleString('pt-BR')
+    };
+
+    fetch(APPS_SCRIPT_URL, {
+      method: 'POST',
+      mode: 'no-cors',         // Apps Script requer no-cors
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    })
+    .then(() => {
+      document.getElementById('rsvpForm').style.display = 'none';
+      document.getElementById('rsvpSuccess').style.display = 'block';
+    })
+    .catch(() => {
+      btn.textContent = 'Confirmar Presença';
+      btn.disabled = false;
+      showError('Erro ao enviar. Tente novamente ou entre em contato pelo WhatsApp.');
+    });
+  }
+
+  function showError(msg) {
+    const el = document.getElementById('rsvpError');
+    el.textContent = msg;
+    el.style.display = 'block';
   }
 
   function submitMsg() {
