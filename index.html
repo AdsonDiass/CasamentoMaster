@@ -587,6 +587,41 @@
       white-space: nowrap;
     }
     .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+    /* ── MUSIC PLAYER ─────────────────────────────────── */
+    .music-btn {
+      position: fixed;
+      bottom: 1.5rem;
+      right: 1.5rem;
+      z-index: 200;
+      width: 48px; height: 48px;
+      border-radius: 50%;
+      background: var(--gold);
+      border: none;
+      cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+      transition: background .2s, transform .2s;
+    }
+    .music-btn:hover { background: var(--gold-dk); transform: scale(1.08); }
+    .music-btn svg { width: 20px; height: 20px; fill: white; }
+    .music-tooltip {
+      position: fixed;
+      bottom: 1.5rem;
+      right: 5rem;
+      z-index: 200;
+      background: var(--text);
+      color: white;
+      font-size: 0.72rem;
+      letter-spacing: 0.06em;
+      padding: 0.4rem 0.9rem;
+      border-radius: 2px;
+      opacity: 0;
+      transform: translateX(6px);
+      transition: opacity .3s, transform .3s;
+      pointer-events: none;
+      white-space: nowrap;
+    }
+    .music-tooltip.show { opacity: 1; transform: translateX(0); }
   </style>
 </head>
 <body>
@@ -769,7 +804,9 @@
           São Paulo — SP
         </p>
       </div>
-      <div class="ceremony-card">
+
+      <!-- Card da festa: revelado só após o casamento -->
+      <div class="ceremony-card" id="festaCard" style="display:none;">
         <div class="card-icon">✦</div>
         <h3>Recepção & Festa</h3>
         <p>
@@ -778,6 +815,15 @@
           Espaço Villa Bella<br>
           Av. Jardins, 1200 — Moema<br>
           São Paulo — SP
+        </p>
+      </div>
+
+      <!-- Cadeado: visível antes do casamento -->
+      <div class="ceremony-card" id="festaLock">
+        <div class="card-icon">💍</div>
+        <h3>Recepção & Festa</h3>
+        <p style="font-family:'Cormorant Garamond',serif;font-style:italic;">
+          Um pequeno mistério para deixar tudo mais divertido: o local da recepção será revelado após o casamento! 💍
         </p>
       </div>
     </div>
@@ -790,6 +836,7 @@
         loading="lazy">
       </iframe>
     </div>
+
   </div>
 </section>
 
@@ -947,6 +994,50 @@
   <span style="margin-top:.6rem;display:block">Feito com ♡ e fé para o nosso grande dia</span>
 </footer>
 
+<!-- ── MUSIC PLAYER ──────────────────────────────────── -->
+<div class="music-tooltip" id="musicTooltip">♫ A Thousand Years</div>
+<button class="music-btn" id="musicBtn" onclick="toggleMusic()" aria-label="Música">
+  <svg id="iconPlay" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+  <svg id="iconPause" viewBox="0 0 24 24" style="display:none"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+</button>
+
+<!-- YouTube iframe oculto como fonte de áudio -->
+<iframe
+  id="ytPlayer"
+  src="https://www.youtube.com/embed/rtOvBOTyX00?enablejsapi=1&autoplay=0&controls=0&loop=1&playlist=rtOvBOTyX00"
+  style="display:none"
+  allow="autoplay"
+  title="Música de fundo">
+</iframe>
+
+<script>
+  // ── MUSIC ─────────────────────────────────────────────
+  let playing = false;
+  const iframe = document.getElementById('ytPlayer');
+  const tooltip = document.getElementById('musicTooltip');
+
+  function toggleMusic() {
+    if (!playing) {
+      // Mostra o iframe e manda play via postMessage
+      iframe.style.display = 'block';
+      iframe.contentWindow.postMessage('{"event":"command","func":"playVideo","args":""}', '*');
+      document.getElementById('iconPlay').style.display  = 'none';
+      document.getElementById('iconPause').style.display = 'block';
+      showTooltip();
+    } else {
+      iframe.contentWindow.postMessage('{"event":"command","func":"pauseVideo","args":""}', '*');
+      document.getElementById('iconPlay').style.display  = 'block';
+      document.getElementById('iconPause').style.display = 'none';
+    }
+    playing = !playing;
+  }
+
+  function showTooltip() {
+    tooltip.classList.add('show');
+    setTimeout(() => tooltip.classList.remove('show'), 3000);
+  }
+</script>
+
 <!-- Toast -->
 <div class="toast" id="toast"></div>
 
@@ -964,15 +1055,35 @@
   function updateCountdown() {
     const diff = weddingDate - new Date();
     if (diff <= 0) {
-      document.querySelector('.countdown').innerHTML = `
-        <div style="text-align:center;animation:fadeIn 2s ease;">
-          <p style="font-family:'Cormorant Garamond',serif;font-size:2rem;font-style:italic;color:var(--gold-dk);line-height:1.6;">
-            Hoje é o grande dia! ♡
-          </p>
-          <p style="font-family:'Cormorant Garamond',serif;font-size:1.1rem;color:var(--text-lt);font-style:italic;margin-top:.6rem;">
-            Kethilly & Kayky dizem o seu "sim" hoje.
-          </p>
-        </div>`;
+      const today = new Date();
+      const wedding = new Date('2027-06-30');
+      const isWeddingDay = today.getFullYear() === wedding.getFullYear()
+                        && today.getMonth()    === wedding.getMonth()
+                        && today.getDate()     === wedding.getDate();
+
+      if (isWeddingDay) {
+        document.querySelector('.countdown').innerHTML = `
+          <div style="text-align:center;animation:fadeIn 2s ease;">
+            <p style="font-family:'Cormorant Garamond',serif;font-size:2rem;font-style:italic;color:var(--gold-dk);line-height:1.6;">
+              Hoje é o grande dia! ♡
+            </p>
+            <p style="font-family:'Cormorant Garamond',serif;font-size:1.1rem;color:var(--text-lt);font-style:italic;margin-top:.6rem;">
+              Kethilly & Kayky dizem o seu "sim" hoje.
+            </p>
+          </div>`;
+      } else {
+        // Calcula quantos dias já se passaram
+        const diasCasados = Math.floor((today - wedding) / 86400000);
+        document.querySelector('.countdown').innerHTML = `
+          <div style="text-align:center;animation:fadeIn 2s ease;">
+            <p style="font-family:'Cormorant Garamond',serif;font-size:2rem;font-style:italic;color:var(--gold-dk);line-height:1.6;">
+              Casados! ♡
+            </p>
+            <p style="font-family:'Cormorant Garamond',serif;font-size:1.1rem;color:var(--text-lt);font-style:italic;margin-top:.6rem;">
+              Kethilly & Kayky — ${diasCasados} ${diasCasados === 1 ? 'dia' : 'dias'} de uma história linda juntos.
+            </p>
+          </div>`;
+      }
       return;
     }
     const d = Math.floor(diff / 86400000);
@@ -1049,7 +1160,15 @@
     setTimeout(() => t.classList.remove('show'), 3000);
   }
 
-  // ── CONFIGURAÇÃO ─────────────────────────────────────
+  // ── FESTA (revelada após o casamento) ────────────────
+  (function() {
+    const hoje = new Date();
+    const casamento = new Date('2027-06-30T23:59:00');
+    if (hoje > casamento) {
+      document.getElementById('festaLock').style.display = 'none';
+      document.getElementById('festaCard').style.display = 'block';
+    }
+  })();
   // Cole aqui a URL gerada pelo Google Apps Script após publicar
   const APPS_SCRIPT_URL = 'COLE_SUA_URL_AQUI';
 
