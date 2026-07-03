@@ -995,37 +995,30 @@
 </footer>
 
 <!-- ── MUSIC PLAYER ──────────────────────────────────── -->
-<div class="music-tooltip" id="musicTooltip">♫ A Thousand Years</div>
+<div class="music-tooltip" id="musicTooltip">♫ Romantic Piano</div>
 <button class="music-btn" id="musicBtn" onclick="toggleMusic()" aria-label="Música">
   <svg id="iconPlay" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
   <svg id="iconPause" viewBox="0 0 24 24" style="display:none"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
 </button>
 
-<!-- YouTube iframe oculto como fonte de áudio -->
-<iframe
-  id="ytPlayer"
-  src="https://www.youtube.com/embed/rtOvBOTyX00?enablejsapi=1&autoplay=0&controls=0&loop=1&playlist=rtOvBOTyX00"
-  style="display:none"
-  allow="autoplay"
-  title="Música de fundo">
-</iframe>
+<audio id="bgMusic" loop>
+  <source src="alex-morgan-romantic-date-piano-548637.mp3" type="audio/mpeg">
+</audio>
 
 <script>
   // ── MUSIC ─────────────────────────────────────────────
   let playing = false;
-  const iframe = document.getElementById('ytPlayer');
+  const music = document.getElementById('bgMusic');
   const tooltip = document.getElementById('musicTooltip');
 
   function toggleMusic() {
     if (!playing) {
-      // Mostra o iframe e manda play via postMessage
-      iframe.style.display = 'block';
-      iframe.contentWindow.postMessage('{"event":"command","func":"playVideo","args":""}', '*');
+      music.play();
       document.getElementById('iconPlay').style.display  = 'none';
       document.getElementById('iconPause').style.display = 'block';
       showTooltip();
     } else {
-      iframe.contentWindow.postMessage('{"event":"command","func":"pauseVideo","args":""}', '*');
+      music.pause();
       document.getElementById('iconPlay').style.display  = 'block';
       document.getElementById('iconPause').style.display = 'none';
     }
