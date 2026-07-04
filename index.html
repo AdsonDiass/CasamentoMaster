@@ -858,24 +858,26 @@
     <h2 class="section-title"><em>Presentes</em></h2>
     <div class="divider"></div>
     <p style="text-align:center;color:var(--text-lt);margin-bottom:2rem;font-size:.9rem;">
-      Sua presença é o maior presente. Mas se quiser nos dar algo especial, aqui estão algumas sugestões ♡
+      Sua presença já é o maior presente. Mas se quiser contribuir com a nossa história, escolha uma cota abaixo ♡
     </p>
 
-    <div class="gifts-controls">
-      <label>Ordenar por</label>
-      <select id="sort-select" onchange="sortGifts()">
-        <option value="default">Destaques</option>
-        <option value="az">A–Z</option>
-        <option value="asc">Menor preço</option>
-        <option value="desc">Maior preço</option>
-      </select>
-      <div class="cart-info">
-        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M1 1h2l1.5 7h8l1.5-5H4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/><circle cx="7" cy="13.5" r="1" fill="currentColor"/><circle cx="12" cy="13.5" r="1" fill="currentColor"/></svg>
-        <span id="cart-count">0 item(s) presenteado(s)</span>
+    <div class="gift-grid" id="giftGrid"></div>
+
+    <!-- Modal Pix -->
+    <div id="pixModal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:500;align-items:center;justify-content:center;padding:1rem;">
+      <div style="background:var(--ivory);max-width:400px;width:100%;border-radius:2px;padding:2.5rem;text-align:center;position:relative;">
+        <button onclick="closeModal()" style="position:absolute;top:1rem;right:1rem;background:none;border:none;font-size:1.4rem;cursor:pointer;color:var(--text-lt);">×</button>
+        <div style="font-size:2rem;margin-bottom:.8rem;" id="modalEmoji"></div>
+        <h3 style="font-family:'Cormorant Garamond',serif;font-size:1.4rem;font-weight:400;color:var(--text);margin-bottom:.4rem;" id="modalName"></h3>
+        <p style="font-size:1.1rem;color:var(--gold-dk);font-weight:700;margin-bottom:1.5rem;" id="modalPrice"></p>
+        <div style="background:var(--ivory-2);border:1px solid var(--gold-lt);border-radius:2px;padding:1.2rem;margin-bottom:1.2rem;">
+          <p style="font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;color:var(--text-lt);margin-bottom:.5rem;">Chave Pix</p>
+          <p style="font-size:1.05rem;font-weight:700;color:var(--text);letter-spacing:.04em;" id="pixKey">79999297319</p>
+        </div>
+        <button class="btn-primary" onclick="copyPix()" id="copyBtn">Copiar Chave Pix</button>
+        <p style="font-size:.75rem;color:var(--text-lt);margin-top:1rem;line-height:1.6;">Após o Pix, sua contribuição chega diretamente para nós. Muito obrigada pelo carinho! ♡</p>
       </div>
     </div>
-
-    <div class="gift-grid" id="giftGrid"></div>
   </div>
 </section>
 
@@ -1106,19 +1108,19 @@
   setInterval(updateCountdown, 1000);
 
   /* ── GIFTS ───────────────────────────────────────────── */
-  const gifts = [
-    { id:1, name:'Cota de Lua de Mel', price:250, emoji:'✈️', desc:'Ajude-nos a viver uma viagem inesquecível para a nossa lua de mel.' },
-    { id:2, name:'Jogo de Panelas Premium', price:890, emoji:'🍳', desc:'Conjunto de panelas antiaderentes de alta qualidade para equipar nossa cozinha.' },
-    { id:3, name:'Máquina de Café Espresso', price:1200, emoji:'☕', desc:'Para começar cada manhã juntos com o café perfeito.' },
-    { id:4, name:'Aparelho de Jantar', price:480, emoji:'🍽️', desc:'Conjunto completo de pratos, tigelas e xícaras para receber com elegância.' },
-    { id:5, name:'Kit Cama & Mesa', price:320, emoji:'🛏️', desc:'Lençóis de algodão egípcio e toalhas finas para o novo lar.' },
-    { id:6, name:'Smart TV 55"', price:2800, emoji:'📺', desc:'Para as noites de filme e relaxamento no novo lar.' },
-    { id:7, name:'Robô Aspirador', price:1500, emoji:'🤖', desc:'Porque o tempo livre é valioso para quem está construindo uma vida juntos.' },
-    { id:8, name:'Kit Churrasco', price:390, emoji:'🔥', desc:'Tudo para os churrascos do casal: churrasqueira, utensílios e muito mais.' },
-  ];
+  // ── PRESENTES / PIX ───────────────────────────────────
+  const PIX_KEY = '79999297319';
 
-  let cartCount = 0;
-  let addedIds = new Set();
+  const gifts = [
+    { id:1, name:'Lua de Mel',         price:300,  emoji:'✈️', desc:'Ajude-nos a viver momentos inesquecíveis na nossa lua de mel.' },
+    { id:2, name:'Nosso Lar',          price:200,  emoji:'🏠', desc:'Contribua para a construção do nosso novo lar juntos.' },
+    { id:3, name:'Jantar Romântico',   price:150,  emoji:'🍷', desc:'Patrocine um jantar especial para celebrarmos nosso amor.' },
+    { id:4, name:'Noite de Hotel',     price:250,  emoji:'🌙', desc:'Uma noite especial para o casal durante a lua de mel.' },
+    { id:5, name:'Passeio a Dois',     price:100,  emoji:'🗺️', desc:'Um passeio inesquecível para criarmos novas memórias.' },
+    { id:6, name:'Buquê da Noiva',     price:80,   emoji:'💐', desc:'Contribua para o buquê que ela vai carregar no altar.' },
+    { id:7, name:'Surpresa do Casal',  price:50,   emoji:'🎁', desc:'Um mimo especial para o casal no valor que seu coração mandar.' },
+    { id:8, name:'Nossa História',     price:500,  emoji:'♡',  desc:'Uma contribuição especial para o início da nossa nova vida.' },
+  ];
 
   function renderGifts(list) {
     const grid = document.getElementById('giftGrid');
@@ -1129,33 +1131,41 @@
           <h4>${g.name}</h4>
           <p class="price">R$ ${g.price.toLocaleString('pt-BR')},00</p>
           <p class="desc">${g.desc}</p>
-          <button class="btn-gift ${addedIds.has(g.id)?'added':''}"
-            onclick="addGift(${g.id}, this)">
-            ${addedIds.has(g.id) ? '✓ Presenteado' : 'Presentear'}
-          </button>
+          <button class="btn-gift" onclick="openModal(${g.id})">Presentear via Pix</button>
         </div>
       </div>
     `).join('');
   }
 
-  function sortGifts() {
-    const v = document.getElementById('sort-select').value;
-    let list = [...gifts];
-    if (v === 'az') list.sort((a,b) => a.name.localeCompare(b.name));
-    else if (v === 'asc') list.sort((a,b) => a.price - b.price);
-    else if (v === 'desc') list.sort((a,b) => b.price - a.price);
-    renderGifts(list);
+  function openModal(id) {
+    const g = gifts.find(x => x.id === id);
+    document.getElementById('modalEmoji').textContent  = g.emoji;
+    document.getElementById('modalName').textContent   = g.name;
+    document.getElementById('modalPrice').textContent  = `R$ ${g.price.toLocaleString('pt-BR')},00`;
+    document.getElementById('pixKey').textContent      = PIX_KEY;
+    document.getElementById('copyBtn').textContent     = 'Copiar Chave Pix';
+    const modal = document.getElementById('pixModal');
+    modal.style.display = 'flex';
   }
 
-  function addGift(id, btn) {
-    if (addedIds.has(id)) return;
-    addedIds.add(id);
-    cartCount++;
-    document.getElementById('cart-count').textContent = cartCount + ' item(s) presenteado(s)';
-    btn.textContent = '✓ Presenteado';
-    btn.classList.add('added');
-    showToast('Presente adicionado! Obrigado pelo carinho ♡');
+  function closeModal() {
+    document.getElementById('pixModal').style.display = 'none';
   }
+
+  function copyPix() {
+    navigator.clipboard.writeText(PIX_KEY).then(() => {
+      document.getElementById('copyBtn').textContent = '✓ Copiado!';
+      showToast('Chave Pix copiada! ♡');
+      setTimeout(() => {
+        document.getElementById('copyBtn').textContent = 'Copiar Chave Pix';
+      }, 3000);
+    });
+  }
+
+  // Fechar modal clicando fora
+  document.getElementById('pixModal').addEventListener('click', function(e) {
+    if (e.target === this) closeModal();
+  });
 
   renderGifts(gifts);
 
