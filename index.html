@@ -638,7 +638,7 @@
     <li><a href="#padrinhos" onclick="closeMenu()">Padrinhos</a></li>
     <li><a href="#cerimonia" onclick="closeMenu()">Cerimônia</a></li>
     <li><a href="#presentes" onclick="closeMenu()">Presentes</a></li>
-    <li><a href="#rsvp" onclick="closeMenu()">Confirmar</a></li>
+    <li><a href="#rsvp" onclick="closeMenu()">Presença</a></li>
     <li><a href="#recados" onclick="closeMenu()">Recados</a></li>
   </ul>
 </nav>
@@ -887,60 +887,40 @@
     <p class="eyebrow">Confirme sua</p>
     <h2 class="section-title"><em>Presença</em></h2>
     <div class="divider"></div>
-    <p style="text-align:center;color:var(--text-lt);margin-bottom:2rem;font-size:.9rem;">
-      Por favor, confirme sua presença até <strong>30 de Abril de 2027</strong>.
+    <p style="text-align:center;color:var(--text-lt);margin-bottom:2.5rem;font-size:.9rem;">
+      Por favor, confirme sua presença até <strong>30 de Abril de 2027</strong>.<br>
+      O convite é <strong>individual</strong> — cada convidado confirma separadamente.
     </p>
 
-    <!-- aviso convite individual -->
-    <div style="display:flex;align-items:center;gap:.7rem;background:var(--ivory-2);border:1px solid var(--gold-lt);border-radius:2px;padding:.9rem 1.2rem;max-width:640px;margin:0 auto 1.8rem;">
-      <span style="color:var(--gold);font-size:1.1rem;">♡</span>
-      <p style="font-size:.82rem;color:var(--text-lt);line-height:1.6;">
-        O convite é <strong style="color:var(--text);">individual</strong> — cada convidado confirma a sua presença separadamente.
-      </p>
-    </div>
-
-    <div class="form-card">
-      <div id="rsvpForm">
-        <div class="form-group">
-          <label>Seu Nome Completo *</label>
-          <input type="text" id="rsvp-name" placeholder="Seu nome completo" />
-        </div>
-
-        <div class="form-group">
-          <label>Você vai comparecer? *</label>
-          <div class="radio-group">
-            <label><input type="radio" name="attending" value="Sim, estarei lá! 🎉"> Sim, estarei lá!</label>
-            <label><input type="radio" name="attending" value="Infelizmente não poderei"> Infelizmente não poderei</label>
-          </div>
-        </div>
-
-        <div class="form-row">
-          <div class="form-group">
-            <label>E-mail *</label>
-            <input type="email" id="rsvp-email" placeholder="seu@email.com" />
-          </div>
-          <div class="form-group">
-            <label>Telefone / WhatsApp</label>
-            <input type="tel" id="rsvp-phone" placeholder="(00) 00000-0000" />
-          </div>
-        </div>
-
-        <div class="form-group">
-          <label>Observações</label>
-          <textarea id="rsvp-obs" placeholder="Restrições alimentares, necessidades especiais..."></textarea>
-        </div>
-
-        <div class="check-group">
-          <label><input type="checkbox" id="rsvp-terms"> Li e aceito os <a href="#" style="color:var(--gold-dk)">Termos de Uso</a> e a <a href="#" style="color:var(--gold-dk)">Política de Privacidade</a></label>
-          <label><input type="checkbox" id="rsvp-news"> Quero receber informações e atualizações sobre o casamento</label>
-        </div>
-
-        <button class="btn-primary" id="rsvpBtn" onclick="submitRSVP()">Confirmar Presença</button>
-        <p id="rsvpError" style="display:none;text-align:center;color:#b94a48;font-size:.82rem;margin-top:.8rem;"></p>
-      </div>
-      <div class="form-success" id="rsvpSuccess">
-        ♡ Confirmação recebida!<br>
-        <span style="font-size:.95rem;color:var(--text-lt);font-family:'Lato',sans-serif;font-style:normal;">Mal podemos esperar para celebrar com você.</span>
+    <div style="text-align:center;">
+      <div style="display:inline-flex;flex-direction:column;align-items:center;gap:1.2rem;background:var(--white);border:1px solid var(--gold-lt);border-radius:2px;padding:2.5rem 3rem;max-width:420px;width:100%;">
+        <div style="font-size:2.5rem;">💬</div>
+        <p style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.2rem;color:var(--text);line-height:1.7;">
+          Confirme sua presença diretamente pelo WhatsApp. É rápido e fácil!
+        </p>
+        <a
+          href="https://wa.me/5579999297319?text=Olá%20Kethilly!%20Confirmo%20minha%20presença%20no%20seu%20casamento%20em%2030%2F06%2F2027%20♡"
+          target="_blank"
+          style="
+            display:inline-flex;align-items:center;gap:.7rem;
+            background:#25D366;color:white;
+            text-decoration:none;
+            padding:.85rem 2rem;
+            border-radius:2px;
+            font-family:'Lato',sans-serif;
+            font-size:.82rem;
+            letter-spacing:.1em;
+            text-transform:uppercase;
+            font-weight:700;
+            transition:background .2s;
+          "
+          onmouseover="this.style.background='#1ebe5d'"
+          onmouseout="this.style.background='#25D366'"
+        >
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.554 4.118 1.526 5.847L0 24l6.302-1.503A11.95 11.95 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.885 0-3.656-.502-5.187-1.381l-.371-.22-3.742.892.933-3.648-.242-.381A9.96 9.96 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
+          Confirmar pelo WhatsApp
+        </a>
+        <p style="font-size:.75rem;color:var(--text-lt);">Você será redirecionado com uma mensagem já preenchida ♡</p>
       </div>
     </div>
   </div>
@@ -1006,7 +986,7 @@
   30 · 06 · 2027 &nbsp;—&nbsp; Estância, SE<br>
   <span style="margin-top:.6rem;display:block">Feito com ♡ e fé para o nosso grande dia</span>
   <span style="margin-top:1.2rem;display:block;font-size:0.68rem;opacity:.35;letter-spacing:0.1em;">
-    Desenvolvido por Adson Dias | <a href="https://portfolio.zonadev.com.br" target="_blank" style="color:var(--gold);text-decoration:none;">Zonadev</a>
+    Desenvolvido por Adson Dias | <a href="https://www.zonadev.com.br" target="_blank" style="color:var(--gold);text-decoration:none;">Zonadev</a>
   </span>
 </footer>
 
