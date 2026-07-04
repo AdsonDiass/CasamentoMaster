@@ -639,7 +639,7 @@
     <li><a href="#cerimonia" onclick="closeMenu()">Cerimônia</a></li>
     <li><a href="#presentes" onclick="closeMenu()">Presentes</a></li>
     <li><a href="#rsvp" onclick="closeMenu()">Presença</a></li>
-    <li><a href="#recados" onclick="closeMenu()">Recados</a></li>
+    <li><a href="#recados" onclick="closeMenu()">Bênçãos</a></li>
   </ul>
 </nav>
 
@@ -929,53 +929,45 @@
 <!-- ── RECADOS ─────────────────────────────────────────── -->
 <section id="recados">
   <div class="section-inner">
-    <p class="eyebrow">Deixe sua</p>
-    <h2 class="section-title"><em>Mensagem</em></h2>
+    <p class="eyebrow">Palavras que nos guiam</p>
+    <h2 class="section-title">Votos de <em>Fé</em></h2>
     <div class="divider"></div>
-    <p style="text-align:center;color:var(--text-lt);margin-bottom:2rem;font-size:.9rem;">
-      Deixe um recado especial para os noivos. Cada palavra significa muito para nós ♡
+    <p style="text-align:center;color:var(--text-lt);margin-bottom:3rem;font-size:.9rem;">
+      Versículos que iluminam nossa caminhada e abençoam esta união ♡
     </p>
 
-    <div class="form-card">
-      <div id="msgForm">
-        <div class="form-row">
-          <div class="form-group">
-            <label>Seu Nome *</label>
-            <input type="text" id="msg-name" placeholder="Seu nome" />
-          </div>
-          <div class="form-group">
-            <label>E-mail</label>
-            <input type="email" id="msg-email" placeholder="seu@email.com" />
-          </div>
-        </div>
-        <div class="form-group">
-          <label>Seu Recado *</label>
-          <textarea id="msg-text" placeholder="Escreva aqui sua mensagem para os noivos..." style="min-height:130px"></textarea>
-        </div>
-        <div class="check-group">
-          <label><input type="checkbox" id="msg-terms"> Li e aceito os <a href="#" style="color:var(--gold-dk)">Termos de Uso</a> e a <a href="#" style="color:var(--gold-dk)">Política de Privacidade</a></label>
-        </div>
-        <button class="btn-primary" onclick="submitMsg()">Enviar Recado</button>
-      </div>
-      <div class="form-success" id="msgSuccess">
-        ♡ Mensagem enviada! <br>Iremos guardar suas palavras para sempre.
-      </div>
-    </div>
+    <div class="messages-list">
 
-    <!-- Existing messages -->
-    <div class="messages-list" id="msgList">
       <div class="message-bubble">
-        <div class="msg-name">Maria Lucia Teixeira</div>
-        <div class="msg-text">"Que essa união seja repleta de amor, cumplicidade e muita felicidade. Vocês merecem cada momento lindo que está por vir!"</div>
+        <div class="msg-name">Eclesiastes 4:9-10</div>
+        <div class="msg-text">Melhor são dois do que um, porque têm melhor paga do seu trabalho. Porque se um cair, o outro levanta o seu companheiro.</div>
       </div>
+
       <div class="message-bubble">
-        <div class="msg-name">João Paulo Ferreira</div>
-        <div class="msg-text">"Que essa união seja repleta de fé e amor verdadeiro. Mal posso esperar para celebrar esse dia tão especial com vocês!"</div>
+        <div class="msg-name">1 Coríntios 13:4-7</div>
+        <div class="msg-text">O amor é paciente, o amor é bondoso. Não inveja, não se vangloria, não se orgulha. Não guarda rancor. Tudo sofre, tudo crê, tudo espera, tudo suporta.</div>
       </div>
+
       <div class="message-bubble">
-        <div class="msg-name">Família Andrade</div>
-        <div class="msg-text">"Que Deus abençoe cada passo dessa nova jornada. Estamos com o coração cheio de emoção e gratidão por fazerem parte das nossas vidas."</div>
+        <div class="msg-name">Rute 1:16</div>
+        <div class="msg-text">Onde tu morreres, morrerei eu, e ali serei sepultada. Assim me faça o Senhor, e outro tanto, se não for somente a morte que nos separar.</div>
       </div>
+
+      <div class="message-bubble">
+        <div class="msg-name">Jeremias 29:11</div>
+        <div class="msg-text">Porque sou eu que conheço os planos que tenho para vocês, diz o Senhor, planos de fazê-los prosperar e não de causar dano, planos de dar a vocês esperança e um futuro.</div>
+      </div>
+
+      <div class="message-bubble">
+        <div class="msg-name">Salmos 37:4</div>
+        <div class="msg-text">Deleita-te no Senhor, e ele satisfará os desejos do teu coração. Entrega o teu caminho ao Senhor; confia nele, e ele agirá.</div>
+      </div>
+
+      <div class="message-bubble">
+        <div class="msg-name">Cântico dos Cânticos 3:4</div>
+        <div class="msg-text">Achei aquele a quem minha alma ama; segurei-o e não o deixarei ir.</div>
+      </div>
+
     </div>
   </div>
 </section>
@@ -1247,25 +1239,6 @@
     el.style.display = 'block';
   }
 
-  function submitMsg() {
-    const name = document.getElementById('msg-name').value.trim();
-    const text = document.getElementById('msg-text').value.trim();
-    const terms = document.getElementById('msg-terms').checked;
-
-    if (!name) { showToast('Por favor, informe seu nome.'); return; }
-    if (!text) { showToast('Escreva uma mensagem para os noivos.'); return; }
-    if (!terms) { showToast('Aceite os Termos de Uso para continuar.'); return; }
-
-    // Add to list
-    const list = document.getElementById('msgList');
-    const el = document.createElement('div');
-    el.className = 'message-bubble';
-    el.innerHTML = `<div class="msg-name">${name}</div><div class="msg-text">"${text}"</div>`;
-    list.prepend(el);
-
-    document.getElementById('msgForm').style.display = 'none';
-    document.getElementById('msgSuccess').style.display = 'block';
-  }
 </script>
 </body>
 </html>
