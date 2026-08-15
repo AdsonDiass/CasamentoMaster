@@ -858,7 +858,7 @@
       <!-- Using OpenStreetMap as embed (no API key needed) -->
       <iframe
         title="Localização da Cerimônia"
-        src="https://www.openstreetmap.org/export/embed.html?bbox=-37.4450,-11.2700,-37.4350,-11.2620&layer=mapnik&marker=-11.2660,-37.4400"
+        src="https://www.openstreetmap.org/export/embed.html?bbox=-37.4450,-11.2700,-37.4350,-11.2620&layer=mapnik&marker=-11.268632954431583, -37.437849518567965"
         loading="lazy">
       </iframe>
     </div>
@@ -1178,7 +1178,7 @@
     }
   })();
   
-  const APPS_SCRIPT_URL = 'COLE_SUA_URL_AQUI';
+  const APPS_SCRIPT_URL = 'COLE_URL_AQUI';
 
   function submitRSVP() {
     const name     = document.getElementById('rsvp-name').value.trim();
@@ -1197,7 +1197,7 @@
     if (!attending){ showError('Por favor, confirme se irá comparecer.'); return; }
     if (!terms)    { showError('Aceite os Termos de Uso para continuar.'); return; }
 
-    if (APPS_SCRIPT_URL === 'COLE_SUA_URL_AQUI') {
+    if (APPS_SCRIPT_URL === 'COLE_URL_AQUI') {
       document.getElementById('rsvpForm').style.display = 'none';
       document.getElementById('rsvpSuccess').style.display = 'block';
       return;
