@@ -903,7 +903,7 @@
     <h2 class="section-title"><em>Presença</em></h2>
     <div class="divider"></div>
     <p style="text-align:center;color:var(--text-lt);margin-bottom:2.5rem;font-size:.9rem;">
-      Por favor, confirme sua presença até <strong>30 de Novembro de 2026</strong>.<br>
+      Por favor, confirme sua presença até <strong>31 de Agosto de 2026</strong>.<br>
       O convite é <strong>individual</strong> — cada convidado confirma separadamente.
     </p>
 
@@ -1100,15 +1100,15 @@
 
   const gifts = [
     { id:1, name:"Só pra não dizer que não dei nada", price:50, img:"g1.jpg", desc:"Aquele presente básico mas com muito amor. Ou quase isso." },
-    { id:2, name:"Taxa para dar pitaco na festa", price:851, img:"g2.jpg", desc:"Vai falar que a decoração podia ser diferente? Então taxa aí." },
-    { id:3, name:"Primeiro lugar na fila do buffet", price:591, img:"g3.jpg", desc:"Lugar cativo garantido na frente de todo mundo. Sem julgamentos." },
-    { id:4, name:"Levar alguém que não foi convidado", price:435, img:"g4.jpg", desc:"A taxa existe. O olhar do noivo ao ver também." },
+    { id:2, name:"Taxa para dar pitaco na festa", price:300, img:"g2.jpg", desc:"Vai falar que a decoração podia ser diferente? Então taxa aí." },
+    { id:3, name:"Primeiro lugar na fila do buffet", price:250, img:"g3.jpg", desc:"Lugar cativo garantido na frente de todo mundo. Sem julgamentos." },
+    { id:4, name:"Levar alguém que não foi convidado", price:120, img:"g4.jpg", desc:"A taxa existe. O olhar do noivo ao ver também." },
     { id:5, name:"Jogar o buquê na sua direção", price:488, img:"g5.jpg", desc:"Quer casar logo? Investe aqui que a gente te ajuda." },
-    { id:6, name:"Deus tocou seu coração", price:945, img:"g6.jpg", desc:"Você sentiu, né? Aquele chamado especial pra abrir o Pix." },
-    { id:7, name:"Taxa para chegar atrasado", price:643, img:"g7.jpg", desc:"Vai chegar depois da noiva? Tudo bem, mas tem um preço." },
-    { id:8, name:"Cadeira com visão privilegiada", price:540, img:"g8.jpg", desc:"Assento VIP na cerimônia. Com estilo e requinte." },
-    { id:9, name:"Não jogar o buquê na sua namorada", price:503, img:"g9.jpg", desc:"Entendemos. Às vezes é melhor prevenir do que remediar." },
-    { id:10, name:"Ajude o casal a pagar a lua de mel", price:1059, img:"g10.jpg", desc:"Olha essa carinha. Você consegue resistir?" },
+    { id:6, name:"Deus tocou seu coração", price:800, img:"g6.jpg", desc:"Você sentiu, né? Aquele chamado especial pra abrir o Pix." },
+    { id:7, name:"Taxa para chegar atrasado", price:400, img:"g7.jpg", desc:"Vai chegar depois da noiva? Tudo bem, mas tem um preço." },
+    { id:8, name:"Cadeira com visão privilegiada", price:150, img:"g8.jpg", desc:"Assento VIP na cerimônia. Com estilo e requinte." },
+    { id:9, name:"Não jogar o buquê na sua namorada", price:90, img:"g9.jpg", desc:"Entendemos. Às vezes é melhor prevenir do que remediar." },
+    { id:10, name:"Ajude o casal a pagar a lua de mel", price:1000, img:"g10.jpg", desc:"Olha essa carinha. Você consegue resistir?" },
     { id:11, name:"Nossa História — contribuição especial", price:200, img:"g11.jpg", desc:"Pra quem quer contribuir com o começo da nossa nova vida juntos." },
   ];
 
@@ -1168,7 +1168,7 @@
     setTimeout(() => t.classList.remove('show'), 3000);
   }
 
-  // ── FESTA (revelada após o casamento) ────────────────
+  // ── FESTA revelada após o casamento ────────────────
   (function() {
     const hoje = new Date();
     const casamento = new Date('2027-01-09T23:59:00');
@@ -1177,7 +1177,7 @@
       document.getElementById('festaCard').style.display = 'block';
     }
   })();
-  // Cole aqui a URL gerada pelo Google Apps Script após publicar
+  
   const APPS_SCRIPT_URL = 'COLE_SUA_URL_AQUI';
 
   function submitRSVP() {
@@ -1197,7 +1197,6 @@
     if (!attending){ showError('Por favor, confirme se irá comparecer.'); return; }
     if (!terms)    { showError('Aceite os Termos de Uso para continuar.'); return; }
 
-    // Se URL não foi configurada ainda, só mostra sucesso visual
     if (APPS_SCRIPT_URL === 'COLE_SUA_URL_AQUI') {
       document.getElementById('rsvpForm').style.display = 'none';
       document.getElementById('rsvpSuccess').style.display = 'block';
