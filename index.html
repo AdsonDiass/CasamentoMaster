@@ -770,7 +770,17 @@
 }
 
     
-  </style>
+  
+/* Refinamentos da versão de avaliação — sem alterar o site original */
+.padrinhos-groups{gap:clamp(1rem,3vw,2.5rem)}
+.padrinhos-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.7rem}
+.padrinhos-list li{border:1px solid rgba(176,145,91,.28);border-radius:10px;background:linear-gradient(145deg,rgba(255,255,255,.85),rgba(248,244,235,.62));padding:1rem .55rem;font-family:'Cormorant Garamond',serif;font-size:1.23rem;box-shadow:0 5px 20px rgba(72,53,32,.045);transition:transform .2s,box-shadow .2s}
+.padrinhos-list li:hover{transform:translateY(-3px);box-shadow:0 9px 22px rgba(72,53,32,.09)}
+@media(max-width:600px){.padrinhos-groups{grid-template-columns:1fr;gap:2.2rem}.padrinhos-list{grid-template-columns:repeat(2,minmax(0,1fr))}.padrinhos-list li{font-size:1.12rem;padding:.85rem .35rem}}
+/* Molduras e ornamentos discretos, sem ocupar a fotografia */
+.photo-wrap,.photo-container,.couple-photo,.photo-frame{padding:min(1.5vw,10px)!important}
+.photo-wrap::before,.photo-wrap::after,.photo-container::before,.photo-container::after{max-width:36px;max-height:36px}
+</style>
 </head>
 <body>
 
@@ -937,6 +947,7 @@
           <li>Cafu</li>
           <li>Joelison</li>
           <li>Arthur</li>
+          <li>Bruno</li>
         </ul>
       </div>
       <div class="padrinhos-group">
@@ -952,6 +963,7 @@
           <li>Ayslane</li>
           <li>Maria</li>
           <li>Ivia</li>
+          <li>Samily</li>
         </ul>
       </div>
     </div>
@@ -1092,7 +1104,7 @@
           Confirme sua presença diretamente pelo WhatsApp. É rápido e fácil!
         </p>
         <a
-          href="https://wa.me/5579999297319?text=Olá%20Kethilly!%20Confirmo%20minha%20presença%20no%20seu%20casamento%20em%2009%2F01%2F2027%20♡"
+          href="https://wa.me/5579999297319?text=Ol%C3%A1%2C%20Kethilly%21%20Confirmo%20minha%20presen%C3%A7a%20no%20casamento%20de%2009%2F01%2F2027.%20%E2%99%A1" rel="noopener noreferrer"
           target="_blank"
           style="
             display:inline-flex;align-items:center;gap:.7rem;
